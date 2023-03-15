@@ -3,7 +3,7 @@
 
 ## Installation
 
-TODO
+Calculate fiscal year half, quarter, and year to date.
 
 ## Usage
 
@@ -12,6 +12,20 @@ require 'fiscal_year'
 
 FiscalYear.quarters
 => [[4, 5, 6], [7, 8, 9], [10, 11, 12], [1, 2, 3]]
+
+date = Date.parse('2023/08/01')
+
+# get current Half range
+FiscalYear::Half.range_by(date)
+=> Sat, 01 Apr 2023..Sat, 30 Sep 2023
+
+# get current quarter range
+FiscalYear::Quarter.range_by(date)
+=> Sat, 01 Jul 2023..Sat, 30 Sep 2023
+
+# get year to date
+FiscalYear::YearToDate.range_by(date)
+=> Sat, 01 Apr 2023..Thu, 31 Aug 2023
 ```
 
 configure start month
