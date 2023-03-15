@@ -33,6 +33,8 @@ module FiscalYear
     end
 
     def cross_year_months
+      return [] if @config.start_month == 1
+
       months.slice(months.rindex(1), months.length)
     end
 
