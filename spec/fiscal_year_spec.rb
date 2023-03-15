@@ -139,6 +139,15 @@ RSpec.describe FiscalYear do
         expect(FiscalYear.cross_year_months).to eq []
       end
     end
+
+    # なんか一瞬不安になったので追加
+    context "年度開始が12月の場合" do
+      include_context "fiscal_year_start_dec"
+
+      it "年跨ぎする月は1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11月であり、順番が保証されている" do
+        expect(FiscalYear.cross_year_months).to eq [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      end
+    end
   end
 
   # 以下は別クラスで詳しくテストする
