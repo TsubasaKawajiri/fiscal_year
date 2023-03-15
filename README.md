@@ -1,9 +1,18 @@
 # FiscalYear
 
+Calculate fiscal year half, quarter, and year to date.
 
 ## Installation
 
-Calculate fiscal year half, quarter, and year to date.
+```
+gem 'fiscal_year'
+```
+
+then,
+
+```
+bundle install
+```
 
 ## Usage
 
