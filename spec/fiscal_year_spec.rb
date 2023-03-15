@@ -8,7 +8,6 @@ RSpec.describe FiscalYear do
   end
 
   describe "config" do
-
     it "can access?" do
       expect(FiscalYear.config.class).to eq FiscalYear::Config
     end
@@ -23,7 +22,6 @@ RSpec.describe FiscalYear do
   end
 
   describe "#cross_year_month?" do
-
     describe "start at Apr" do
       it "Mar is cross" do
         expect(FiscalYear.cross_year_month?(3)).to be true
@@ -39,7 +37,7 @@ RSpec.describe FiscalYear do
         FiscalYear.configure do |config|
           config.start_month = 6
         end
-  
+
         expect(FiscalYear.cross_year_month?(5)).to be true
       end
 
@@ -47,9 +45,8 @@ RSpec.describe FiscalYear do
         FiscalYear.configure do |config|
           config.start_month = 6
         end
-  
-        expect(FiscalYear.cross_year_month?(7)).to be false
 
+        expect(FiscalYear.cross_year_month?(7)).to be false
       end
     end
   end

@@ -2,13 +2,13 @@
 
 require_relative "fiscal_year/version"
 
-require 'fiscal_year/half'
-require 'fiscal_year/quarter'
-require 'fiscal_year/year_to_date'
-require 'fiscal_year/config'
+require "fiscal_year/half"
+require "fiscal_year/quarter"
+require "fiscal_year/year_to_date"
+require "fiscal_year/config"
 
-require 'active_support'
-require 'active_support/core_ext'
+require "active_support"
+require "active_support/core_ext"
 
 module FiscalYear
   @@config ||= FiscalYear::Config.new
@@ -16,15 +16,15 @@ module FiscalYear
     def config
       @@config
     end
-  
-    def configure(&block)
+
+    def configure
       yield(@@config) if block_given?
     end
 
     def cross_year_month?(month)
       cross_year_months.include?(month)
     end
-  
+
     def cross_year?
       months.rindex(1) != 0
     end
