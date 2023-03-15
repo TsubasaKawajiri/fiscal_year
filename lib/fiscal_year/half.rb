@@ -3,7 +3,6 @@
 module FiscalYear
   class Half
     class << self
-
       def first
         FiscalYear.halfs.first
       end

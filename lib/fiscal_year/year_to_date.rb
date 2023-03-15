@@ -35,7 +35,9 @@ module FiscalYear
 
         return Date.parse("#{year}/#{Half.first.first}")..date.end_of_month.to_date if Half.first?(month)
 
-        Date.parse("#{FiscalYear.cross_year_month?(month) ? year - 1 : year}/#{Half.second.first}")..date.end_of_month.to_date
+        Date.parse(
+          "#{FiscalYear.cross_year_month?(month) ? year - 1 : year}/#{Half.second.first}"
+        )..date.end_of_month.to_date
       end
 
       def quarter_range_by(date)
