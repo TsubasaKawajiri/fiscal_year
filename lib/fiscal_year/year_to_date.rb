@@ -8,9 +8,9 @@ module FiscalYear
         month = date.month
 
         if FiscalYear.cross_year_month?(month)
-          Date.parse("#{year - 1}/#{FiscalYear.config.start_month}")..date.end_of_month.to_date
+          Date.parse("#{year - 1}/#{FiscalYear.config.start_month}/01")..date.end_of_month.to_date
         else
-          Date.parse("#{year}/#{FiscalYear.config.start_month}")..date.end_of_month.to_date
+          Date.parse("#{year}/#{FiscalYear.config.start_month}/01")..date.end_of_month.to_date
         end
       end
 
@@ -29,14 +29,19 @@ module FiscalYear
         pair
       end
 
-      def half_range_by(date)
+      # TODO: fit to Abc size
+      def half_range_by(date) # rubocop:disable Metrics/AbcSize
         year = date.year
         month = date.month
 
-        return Date.parse("#{year}/#{Half.first.first}")..date.end_of_month.to_date if Half.first?(month)
+        if Half.first?(month)
+          return (Date.parse("#{FiscalYear.cross_year_month?(month) ? year - 1 : year}/#{Half.first.first}/01")..
+            date.end_of_month.to_date
+                 )
+        end
 
         Date.parse(
-          "#{FiscalYear.cross_year_month?(month) ? year - 1 : year}/#{Half.second.first}"
+          "#{FiscalYear::Half.cross_year_in_half?(Half.second) ? year - 1 : year}/#{Half.second.first}"
         )..date.end_of_month.to_date
       end
 
@@ -44,11 +49,16 @@ module FiscalYear
         year = date.year
         month = date.month
 
-        %i[first? second? third? fourth?].each do |method_name|
-          if FiscalYear::Quarter.public_send(method_name, month)
-            Date.parse("#{year}/#{Quarter.public_send(method_name).first}")..date.end_of_month.to_date
-          end
-        end
+        quarter_method = %i[first? second? third? fourth?]
+                         .filter { |method_name| FiscalYear::Quarter.public_send(method_name, month) }
+                         .first.to_s.gsub("?", "").to_sym
+
+        quarter = Quarter.public_send(quarter_method)
+
+        (
+          Date.parse("#{FiscalYear.cross_year_month?(month) ? year - 1 : year}/#{quarter.first}/01")..
+          date.end_of_month.to_date
+        )
       end
     end
   end

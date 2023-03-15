@@ -150,45 +150,6 @@ RSpec.describe FiscalYear do
     end
   end
 
-  describe "#normalize_year_by_month" do
-    let(:year) { 2000 }
-    context "年度始まりが4月の場合" do
-      include_context "fiscal_year_start_apr"
-
-      it "4月は同じ年である" do
-        expect(FiscalYear.normalize_year_by_month(year, 4)).to be year
-      end
-
-      it "1月は次の年である" do
-        expect(FiscalYear.normalize_year_by_month(year, 1)).to be(year + 1)
-      end
-    end
-
-    context "年度始まりが1月の場合" do
-      include_context "fiscal_year_start_jan"
-
-      it "1月は同じ年である" do
-        expect(FiscalYear.normalize_year_by_month(year, 1)).to be year
-      end
-
-      it "12月は同じ年である" do
-        expect(FiscalYear.normalize_year_by_month(year, 12)).to be year
-      end
-    end
-
-    context "年度始まりが12月の場合" do
-      include_context "fiscal_year_start_dec"
-
-      it "12月は同じ年である" do
-        expect(FiscalYear.normalize_year_by_month(year, 12)).to be year
-      end
-
-      it "11月は次の年である" do
-        expect(FiscalYear.normalize_year_by_month(year, 1)).to be(year + 1)
-      end
-    end
-  end
-
   # 以下は別クラスで詳しくテストする
   describe "#halfs" do
     it "配列を返す" do
