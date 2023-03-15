@@ -190,51 +190,50 @@ RSpec.describe FiscalYear::Quarter do
     it "true or falseを返す" do
       expect(FiscalYear::Quarter.first?(1).class).to be(TrueClass).or(be FalseClass)
     end
-  
+
     context "年度開始が4月の場合" do
       include_context "fiscal_year_start_apr"
-  
+
       it "4月は1Qである" do
         expect(FiscalYear::Quarter.first?(4)).to be true
       end
-  
+
       it "6月は1Qである" do
         expect(FiscalYear::Quarter.first?(6)).to be true
       end
-  
+
       it "7月は1Qではない" do
         expect(FiscalYear::Quarter.first?(7)).to be false
       end
     end
-  
-  
+
     context "年度開始が1月の場合" do
       include_context "fiscal_year_start_jan"
-  
+
       it "1月は1Qである" do
         expect(FiscalYear::Quarter.first?(1)).to be true
       end
-  
+
       it "3月は1Qである" do
         expect(FiscalYear::Quarter.first?(3)).to be true
       end
-  
+
       it "4月は1Qではない" do
         expect(FiscalYear::Quarter.first?(4)).to be false
       end
     end
-  
+
     context "年度開始が12月の場合" do
       include_context "fiscal_year_start_dec"
-  
+
       it "12月は1Qである" do
         expect(FiscalYear::Quarter.first?(12)).to be true
       end
-  
+
       it "2月は1Qである" do
         expect(FiscalYear::Quarter.first?(2)).to be true
       end
-  
+
       it "3月は1Qではない" do
         expect(FiscalYear::Quarter.first?(3)).to be false
       end
@@ -245,51 +244,50 @@ RSpec.describe FiscalYear::Quarter do
     it "true or falseを返す" do
       expect(FiscalYear::Quarter.second?(1).class).to be(TrueClass).or(be FalseClass)
     end
-  
+
     context "年度開始が4月の場合" do
       include_context "fiscal_year_start_apr"
-  
+
       it "7月は2Qである" do
         expect(FiscalYear::Quarter.second?(7)).to be true
       end
-  
+
       it "9月は2Qである" do
         expect(FiscalYear::Quarter.second?(9)).to be true
       end
-  
+
       it "10月は2Qではない" do
         expect(FiscalYear::Quarter.second?(10)).to be false
       end
     end
-  
-  
+
     context "年度開始が1月の場合" do
       include_context "fiscal_year_start_jan"
-  
+
       it "4月は2Qである" do
         expect(FiscalYear::Quarter.second?(4)).to be true
       end
-  
+
       it "6月は2Qである" do
         expect(FiscalYear::Quarter.second?(6)).to be true
       end
-  
+
       it "7月は2Qではない" do
         expect(FiscalYear::Quarter.second?(7)).to be false
       end
     end
-  
+
     context "年度開始が12月の場合" do
       include_context "fiscal_year_start_dec"
-  
+
       it "3月は2Qである" do
         expect(FiscalYear::Quarter.second?(3)).to be true
       end
-  
+
       it "5月は2Qである" do
         expect(FiscalYear::Quarter.second?(5)).to be true
       end
-  
+
       it "6月は2Qではない" do
         expect(FiscalYear::Quarter.second?(6)).to be false
       end
@@ -300,50 +298,50 @@ RSpec.describe FiscalYear::Quarter do
     it "true or falseを返す" do
       expect(FiscalYear::Quarter.third?(1).class).to be(TrueClass).or(be FalseClass)
     end
-  
+
     context "年度開始が4月の場合" do
       include_context "fiscal_year_start_apr"
-  
+
       it "10月は3Qである" do
         expect(FiscalYear::Quarter.third?(10)).to be true
       end
-  
+
       it "12月は3Qである" do
         expect(FiscalYear::Quarter.third?(12)).to be true
       end
-  
+
       it "1月は3Qではない" do
         expect(FiscalYear::Quarter.third?(1)).to be false
       end
     end
-  
+
     context "年度開始が1月の場合" do
       include_context "fiscal_year_start_jan"
-  
+
       it "7月は3Qである" do
         expect(FiscalYear::Quarter.third?(7)).to be true
       end
-  
+
       it "9月は3Qである" do
         expect(FiscalYear::Quarter.third?(9)).to be true
       end
-  
+
       it "10月は3Qではない" do
         expect(FiscalYear::Quarter.third?(10)).to be false
       end
     end
-  
+
     context "年度開始が12月の場合" do
       include_context "fiscal_year_start_dec"
-  
+
       it "6月は3Qである" do
         expect(FiscalYear::Quarter.third?(6)).to be true
       end
-  
+
       it "8月は3Qである" do
         expect(FiscalYear::Quarter.third?(8)).to be true
       end
-  
+
       it "9月は3Qではない" do
         expect(FiscalYear::Quarter.third?(9)).to be false
       end
@@ -354,50 +352,50 @@ RSpec.describe FiscalYear::Quarter do
     it "true or falseを返す" do
       expect(FiscalYear::Quarter.fourth?(1).class).to be(TrueClass).or(be FalseClass)
     end
-  
+
     context "年度開始が4月の場合" do
       include_context "fiscal_year_start_apr"
-  
+
       it "1月は4Qである" do
         expect(FiscalYear::Quarter.fourth?(1)).to be true
       end
-  
+
       it "3月は4Qである" do
         expect(FiscalYear::Quarter.fourth?(3)).to be true
       end
-  
+
       it "4月は4Qではない" do
         expect(FiscalYear::Quarter.fourth?(4)).to be false
       end
     end
-  
+
     context "年度開始が1月の場合" do
       include_context "fiscal_year_start_jan"
-  
+
       it "10月は4Qである" do
         expect(FiscalYear::Quarter.fourth?(10)).to be true
       end
-  
+
       it "12月は4Qである" do
         expect(FiscalYear::Quarter.fourth?(12)).to be true
       end
-  
+
       it "1月は4Qではない" do
         expect(FiscalYear::Quarter.fourth?(1)).to be false
       end
     end
-  
+
     context "年度開始が12月の場合" do
       include_context "fiscal_year_start_dec"
-  
+
       it "9月は4Qである" do
         expect(FiscalYear::Quarter.fourth?(9)).to be true
       end
-  
+
       it "11月は4Qである" do
         expect(FiscalYear::Quarter.fourth?(11)).to be true
       end
-  
+
       it "12月は4Qではない" do
         expect(FiscalYear::Quarter.fourth?(12)).to be false
       end

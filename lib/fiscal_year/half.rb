@@ -48,7 +48,7 @@ module FiscalYear
       end
 
       def normalize_year_by_month(year, month)
-        if FiscalYear::cross_year_month?(month)
+        if FiscalYear.cross_year_month?(month)
           year + 1
         else
           year
