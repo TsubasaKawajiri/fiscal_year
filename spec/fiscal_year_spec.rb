@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe FiscalYear do
-  before(:each) { FiscalYear.class_variable_set :@@config, FiscalYear::Config.new }
+  before(:each) { FiscalYear.instance_variable_set :@config, FiscalYear::Config.new }
 
   it "has a version number" do
     expect(FiscalYear::VERSION).not_to be nil

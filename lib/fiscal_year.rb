@@ -11,14 +11,13 @@ require "active_support"
 require "active_support/core_ext"
 
 module FiscalYear
-  @@config ||= FiscalYear::Config.new
+  @config ||= FiscalYear::Config.new
+
   class << self
-    def config
-      @@config
-    end
+    attr_reader :config
 
     def configure
-      yield(@@config) if block_given?
+      yield(@config) if block_given?
     end
 
     def cross_year_month?(month)
@@ -30,7 +29,7 @@ module FiscalYear
     end
 
     def months
-      (1..12).to_a.tap { |arr| arr.concat(arr.shift(@@config.start_month - 1)) }
+      (1..12).to_a.tap { |arr| arr.concat(arr.shift(@config.start_month - 1)) }
     end
 
     def cross_year_months
