@@ -31,13 +31,18 @@ module FiscalYear
 
       def range_by(date)
         year = date.year
-        this_quater_months = months(date.month)
+        this_quater = months(date.month)
+        last_year = cross_year_in_quarter?(this_quater) ? year + 1 : year
 
-        Date.parse("#{year}/#{this_quater_months.first}")..Date.parse("#{year}/#{this_quater_months.last}").end_of_month
+        Date.parse("#{year}/#{this_quater.first}/01")..Date.parse("#{last_year}/#{this_quater.last}/01").end_of_month
       end
 
       def quater_num(month)
         (FiscalYear.quarters.rindex(months(month)) + 1)
+      end
+
+      def cross_year_in_quarter?(quarter)
+        FiscalYear.cross_year? && quarter.any? { |month| month == 12 }
       end
     end
   end

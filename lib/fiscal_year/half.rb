@@ -23,7 +23,7 @@ module FiscalYear
         # care Date#parse 2 digit year auto complete.
         # 99 + 1 = 100, but expect 2000 this context.
         year = 1999 if year == 99
-        end_year = FiscalYear.normalize_year_by_month(year, first.last)
+        end_year = normalize_year_by_month(year, first.last)
 
         Date.parse("#{year}/#{first.first}/01")..Date.parse("#{end_year}/#{first.last}/01").end_of_month
       end
@@ -32,8 +32,8 @@ module FiscalYear
         # care Date#parse 2 digit year auto complete.
         # 99 + 1 = 100, but expect 2000 this context.
         year = 1999 if year == 99
-        start_year = FiscalYear.normalize_year_by_month(year, second.first)
-        end_year = FiscalYear.normalize_year_by_month(year, second.last)
+        start_year = normalize_year_by_month(year, second.first)
+        end_year = normalize_year_by_month(year, second.last)
 
         Date.parse("#{start_year}/#{second.first}/01")..Date.parse("#{end_year}/#{second.last}/01").end_of_month
       end
@@ -45,6 +45,18 @@ module FiscalYear
         year -= 1 if FiscalYear.cross_year_month?(month)
 
         first?(month) ? first_range_by(year) : second_range_by(year)
+      end
+
+      def normalize_year_by_month(year, month)
+        if FiscalYear::cross_year_month?(month)
+          year + 1
+        else
+          year
+        end
+      end
+
+      def cross_year_in_half?(half)
+        FiscalYear.cross_year? && half.any? { |month| month == 12 }
       end
     end
   end
