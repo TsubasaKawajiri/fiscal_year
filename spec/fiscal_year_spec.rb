@@ -27,15 +27,11 @@ RSpec.describe FiscalYear do
 
   describe "#cross_year_month?" do
     it "true or falseを返す" do
-      expect(FiscalYear.cross_year_month?(1).class).to be(TrueClass).or(FalseClass)
+      expect(FiscalYear.cross_year_month?(1).class).to be(TrueClass).or(be FalseClass)
     end
 
     context "年度開始が4月の場合" do
-      before do
-        FiscalYear.configure do |config|
-          config.start_month = 4
-        end
-      end
+      include_context "fiscal_year_start_apr"
 
       it "3月は年を跨いでいる" do
         expect(FiscalYear.cross_year_month?(3)).to be true
@@ -47,11 +43,7 @@ RSpec.describe FiscalYear do
     end
 
     context "年度開始が1月の場合" do
-      before do
-        FiscalYear.configure do |config|
-          config.start_month = 1
-        end
-      end
+      include_context "fiscal_year_start_jan"
 
       it "1月は年を跨いでいない" do
         expect(FiscalYear.cross_year_month?(1)).to be false
@@ -63,11 +55,7 @@ RSpec.describe FiscalYear do
     end
 
     context "年度開始が6月の場合" do
-      before do
-        FiscalYear.configure do |config|
-          config.start_month = 6
-        end
-      end
+      include_context "fiscal_year_start_june"
 
       it "5月は年を跨いでいる" do
         expect(FiscalYear.cross_year_month?(5)).to be true
@@ -85,11 +73,7 @@ RSpec.describe FiscalYear do
     end
 
     context "年度開始が4月の場合" do
-      before do
-        FiscalYear.configure do |config|
-          config.start_month = 4
-        end
-      end
+      include_context "fiscal_year_start_apr"
 
       it "年跨ぎが発生する" do
         expect(FiscalYear.cross_year?).to be true
@@ -97,11 +81,7 @@ RSpec.describe FiscalYear do
     end
 
     context "年度開始が1月の場合" do
-      before do
-        FiscalYear.configure do |config|
-          config.start_month = 1
-        end
-      end
+      include_context "fiscal_year_start_jan"
 
       it "年跨ぎは発生しない" do
         expect(FiscalYear.cross_year?).to be false
@@ -115,11 +95,7 @@ RSpec.describe FiscalYear do
     end
 
     context "年度開始が4月の場合" do
-      before do
-        FiscalYear.configure do |config|
-          config.start_month = 4
-        end
-      end
+      include_context "fiscal_year_start_apr"
 
       it "最初の値は4である" do
         expect(FiscalYear.months.first).to be 4
@@ -131,11 +107,7 @@ RSpec.describe FiscalYear do
     end
 
     context "年度開始が1月の場合" do
-      before do
-        FiscalYear.configure do |config|
-          config.start_month = 1
-        end
-      end
+      include_context "fiscal_year_start_jan"
 
       it "最初の値は1である" do
         expect(FiscalYear.months.first).to be 1
@@ -153,11 +125,7 @@ RSpec.describe FiscalYear do
     end
 
     context "年度開始が4月の場合" do
-      before do
-        FiscalYear.configure do |config|
-          config.start_month = 4
-        end
-      end
+      include_context "fiscal_year_start_apr"
 
       it "年跨ぎする月は1, 2, 3月であり、順番が保証されている" do
         expect(FiscalYear.cross_year_months).to eq [1, 2, 3]
@@ -165,11 +133,7 @@ RSpec.describe FiscalYear do
     end
 
     context "年度開始が1月の場合" do
-      before do
-        FiscalYear.configure do |config|
-          config.start_month = 1
-        end
-      end
+      include_context "fiscal_year_start_jan"
 
       it "年跨ぎする月はない" do
         expect(FiscalYear.cross_year_months).to eq []
