@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FiscalYear
   class Config
     attr_accessor :start_month
