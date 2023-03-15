@@ -1,3 +1,7 @@
+![build badge](https://github.com/TsubasaKawajiri/fiscal_year/actions/workflows/main.yml/badge.svg?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/39fdb48501c5f53235a9/maintainability)](https://codeclimate.com/github/TsubasaKawajiri/fiscal_year/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/39fdb48501c5f53235a9/test_coverage)](https://codeclimate.com/github/TsubasaKawajiri/fiscal_year/test_coverage)
+
 # FiscalYear
 
 Calculate fiscal year half, quarter, and year to date.
@@ -42,7 +46,7 @@ configure start month
 ```config/initializer/FiscalYear.rb
 
   FiscalYear.configure do |config|
-    config.start_month = 4 # default 8 (bug)
+    config.start_month = 4
   end
 ```
 
@@ -54,7 +58,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/fiscal_year. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/fiscal_year/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/TsubasaKawajiri/fiscal_year. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/TsubasaKawajiri/fiscal_year/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -62,4 +66,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the FiscalYear project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/fiscal_year/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the FiscalYear project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/TsubasaKawajiri/fiscal_year/blob/master/CODE_OF_CONDUCT.md).
