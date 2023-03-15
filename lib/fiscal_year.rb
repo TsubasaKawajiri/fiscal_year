@@ -33,6 +33,8 @@ module FiscalYear
     end
 
     def cross_year_months
+      return [] if @config.start_month == 1
+
       months.slice(months.rindex(1), months.length)
     end
 
@@ -42,6 +44,14 @@ module FiscalYear
 
     def quarters
       months.in_groups(4)
+    end
+
+    def normalize_year_by_month(year, month)
+      if cross_year_month?(month)
+        year + 1
+      else
+        year
+      end
     end
   end
 end
