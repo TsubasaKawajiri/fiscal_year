@@ -53,4 +53,3 @@ RSpec.shared_context "fiscal_year_start_dec" do
     end
   end
 end
-

@@ -160,7 +160,7 @@ RSpec.describe FiscalYear do
       end
 
       it "1月は次の年である" do
-        expect(FiscalYear.normalize_year_by_month(year, 1)).to be (year + 1)
+        expect(FiscalYear.normalize_year_by_month(year, 1)).to be(year + 1)
       end
     end
 

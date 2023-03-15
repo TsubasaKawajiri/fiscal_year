@@ -89,7 +89,7 @@ RSpec.describe FiscalYear::Half do
       it "10月は前期ではない" do
         expect(FiscalYear::Half.first?(10)).to be false
       end
-    
+
       it "3月は前期ではない" do
         expect(FiscalYear::Half.first?(3)).to be false
       end
@@ -109,7 +109,7 @@ RSpec.describe FiscalYear::Half do
       it "7月は前期ではない" do
         expect(FiscalYear::Half.first?(7)).to be false
       end
-    
+
       it "12月は前期ではない" do
         expect(FiscalYear::Half.first?(12)).to be false
       end
@@ -128,7 +128,7 @@ RSpec.describe FiscalYear::Half do
     it "Range終端がDateである" do
       expect(FiscalYear::Half.first_range_by(2000).last.class).to be Date
     end
-    
+
     context "年度開始が4月の場合" do
       include_context "fiscal_year_start_apr"
 
@@ -271,7 +271,7 @@ RSpec.describe FiscalYear::Half do
     it "Range終端がDateである" do
       expect(FiscalYear::Half.second_range_by(2000).last.class).to be Date
     end
-    
+
     context "年度開始が4月の場合" do
       include_context "fiscal_year_start_apr"
 
@@ -404,22 +404,22 @@ RSpec.describe FiscalYear::Half do
 
   describe "#range_by" do
     it "Rangeを返す" do
-      expect(FiscalYear::Half.range_by(Date.parse('2000/01/01')).class).to be Range
+      expect(FiscalYear::Half.range_by(Date.parse("2000/01/01")).class).to be Range
     end
 
     it "Range始端がDateである" do
-      expect(FiscalYear::Half.range_by(Date.parse('2000/01/01')).first.class).to be Date
+      expect(FiscalYear::Half.range_by(Date.parse("2000/01/01")).first.class).to be Date
     end
 
     it "Range終端がDateである" do
-      expect(FiscalYear::Half.range_by(Date.parse('2000/01/01')).last.class).to be Date
+      expect(FiscalYear::Half.range_by(Date.parse("2000/01/01")).last.class).to be Date
     end
 
     context "年度開始が4月の場合" do
       include_context "fiscal_year_start_apr"
 
       context "2000年4月のとき" do
-        let(:range) { FiscalYear::Half.range_by(Date.parse('2000/04/01')) }
+        let(:range) { FiscalYear::Half.range_by(Date.parse("2000/04/01")) }
         it "Range始端は2000年である" do
           expect(range.first.year).to be 2000
         end
@@ -438,7 +438,7 @@ RSpec.describe FiscalYear::Half do
       end
 
       context "2000年10月のとき" do
-        let(:range) { FiscalYear::Half.range_by(Date.parse('2000/10/01')) }
+        let(:range) { FiscalYear::Half.range_by(Date.parse("2000/10/01")) }
         it "Range始端は2000年である" do
           expect(range.first.year).to be 2000
         end
@@ -457,7 +457,7 @@ RSpec.describe FiscalYear::Half do
       end
 
       context "2000年1月のとき" do
-        let(:range) { FiscalYear::Half.range_by(Date.parse('2000/01/01')) }
+        let(:range) { FiscalYear::Half.range_by(Date.parse("2000/01/01")) }
         it "Range始端は1999年である" do
           expect(range.first.year).to be 1999
         end
@@ -480,7 +480,7 @@ RSpec.describe FiscalYear::Half do
       include_context "fiscal_year_start_jan"
 
       context "2000年1月のとき" do
-        let(:range) { FiscalYear::Half.range_by(Date.parse('2000/01/01')) }
+        let(:range) { FiscalYear::Half.range_by(Date.parse("2000/01/01")) }
         it "Range始端は2000年である" do
           expect(range.first.year).to be 2000
         end
@@ -499,7 +499,7 @@ RSpec.describe FiscalYear::Half do
       end
 
       context "2000年10月のとき" do
-        let(:range) { FiscalYear::Half.range_by(Date.parse('2000/10/01')) }
+        let(:range) { FiscalYear::Half.range_by(Date.parse("2000/10/01")) }
         it "Range始端は2000年である" do
           expect(range.first.year).to be 2000
         end
@@ -518,7 +518,7 @@ RSpec.describe FiscalYear::Half do
       end
 
       context "1999年12月のとき" do
-        let(:range) { FiscalYear::Half.range_by(Date.parse('1999/12/01')) }
+        let(:range) { FiscalYear::Half.range_by(Date.parse("1999/12/01")) }
         it "Range始端は1999年である" do
           expect(range.first.year).to be 1999
         end
@@ -541,7 +541,7 @@ RSpec.describe FiscalYear::Half do
       include_context "fiscal_year_start_dec"
 
       context "2000年1月のとき" do
-        let(:range) { FiscalYear::Half.range_by(Date.parse('2000/01/01')) }
+        let(:range) { FiscalYear::Half.range_by(Date.parse("2000/01/01")) }
         it "Range始端は1999年である" do
           expect(range.first.year).to be 1999
         end
@@ -560,7 +560,7 @@ RSpec.describe FiscalYear::Half do
       end
 
       context "2000年10月のとき" do
-        let(:range) { FiscalYear::Half.range_by(Date.parse('2000/10/01')) }
+        let(:range) { FiscalYear::Half.range_by(Date.parse("2000/10/01")) }
         it "Range始端は2000年である" do
           expect(range.first.year).to be 2000
         end
@@ -579,7 +579,7 @@ RSpec.describe FiscalYear::Half do
       end
 
       context "1999年12月のとき" do
-        let(:range) { FiscalYear::Half.range_by(Date.parse('1999/12/01')) }
+        let(:range) { FiscalYear::Half.range_by(Date.parse("1999/12/01")) }
         it "Range始端は1999年である" do
           expect(range.first.year).to be 1999
         end
