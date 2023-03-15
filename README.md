@@ -42,7 +42,7 @@ configure start month
 ```config/initializer/FiscalYear.rb
 
   FiscalYear.configure do |config|
-    config.start_month = 4
+    config.start_month = 4 # default 8 (bug)
   end
 ```
 
