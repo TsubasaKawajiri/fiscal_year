@@ -1,4 +1,5 @@
 ![build badge](https://github.com/TsubasaKawajiri/fiscal_year/actions/workflows/main.yml/badge.svg?branch=master)
+[![Gem Version](https://badge.fury.io/rb/fiscal_year.svg)](https://badge.fury.io/rb/fiscal_year)
 [![Maintainability](https://api.codeclimate.com/v1/badges/39fdb48501c5f53235a9/maintainability)](https://codeclimate.com/github/TsubasaKawajiri/fiscal_year/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/39fdb48501c5f53235a9/test_coverage)](https://codeclimate.com/github/TsubasaKawajiri/fiscal_year/test_coverage)
 
