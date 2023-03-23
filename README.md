@@ -5,7 +5,10 @@
 
 # FiscalYear
 
-Calculate fiscal year half, quarter, and year to date.
+FiscalYear is calculates half-year, quarter-year, and YTD figures.
+It can take in a year's numerical value or a year and month and return the results as a Range.
+
+Additionally, it allows for the customization of the starting month of the fiscal period.
 
 ## Installation
 
