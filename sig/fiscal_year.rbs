@@ -1,4 +1,13 @@
 module FiscalYear
   VERSION: String
-  # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+  @config: FiscalYear::Config
+  attr_reader config: FiscalYear::Config
+
+  def configure: () { (FiscalYear::Config) -> void } -> void | -> void
+  def cross_year_month?: (Integer) -> String
+  def cross_year?: () -> bool
+  def months: () -> Array[Integer]
+  def cross_year_months: () -> Array[Integer]
+  def halfs: () -> Array[Integer]
+  def quarters: () -> Array[Integer]
 end
