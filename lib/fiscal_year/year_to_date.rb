@@ -7,23 +7,23 @@ module FiscalYear
         year = date.year
         month = date.month
 
-        if FiscalYear::cross_year_month?(month)
-          Date.parse("#{year - 1}/#{FiscalYear::config.start_month}/01")..date.end_of_month.to_date
+        if FiscalYear.cross_year_month?(month)
+          Date.parse("#{year - 1}/#{FiscalYear.config.start_month}/01")..date.end_of_month.to_date
         else
-          Date.parse("#{year}/#{FiscalYear::config.start_month}/01")..date.end_of_month.to_date
+          Date.parse("#{year}/#{FiscalYear.config.start_month}/01")..date.end_of_month.to_date
         end
       end
 
       def year_month_pairs(date)
         month = date.month
-        month_index = FiscalYear::months.index(month)
-        months = FiscalYear::months[(0..month_index)]
+        month_index = FiscalYear.months.index(month)
+        months = FiscalYear.months[(0..month_index)]
         raise StandardError if months.nil?
 
         pair = []
         [date.year].product(months).each do |e|
-          pair << if FiscalYear::cross_year_month?(month)
-                    (FiscalYear::cross_year_month?(e.second) ? e : [e.first - 1, e.second])
+          pair << if FiscalYear.cross_year_month?(month)
+                    (FiscalYear.cross_year_month?(e.second) ? e : [e.first - 1, e.second])
                   else
                     e
                   end
@@ -38,13 +38,13 @@ module FiscalYear
         month = date.month
 
         if Half.first?(month)
-          return (Date.parse("#{FiscalYear::cross_year_month?(month) ? year - 1 : year}/#{Half::first.first}/01")..
+          return (Date.parse("#{FiscalYear.cross_year_month?(month) ? year - 1 : year}/#{Half.first.first}/01")..
             date.end_of_month.to_date
                  )
         end
 
         Date.parse(
-          "#{FiscalYear::Half::cross_year_in_half?(Half::second) ? year - 1 : year}/#{Half::second.first}"
+          "#{FiscalYear::Half.cross_year_in_half?(Half.second) ? year - 1 : year}/#{Half.second.first}"
         )..date.end_of_month.to_date
       end
 
@@ -59,7 +59,7 @@ module FiscalYear
         quarter = Quarter.public_send(quarter_method)
 
         (
-          Date.parse("#{FiscalYear::cross_year_month?(month) ? year - 1 : year}/#{quarter::first}/01")..
+          Date.parse("#{FiscalYear.cross_year_month?(month) ? year - 1 : year}/#{quarter.first}/01")..
           date.end_of_month.to_date
         )
       end

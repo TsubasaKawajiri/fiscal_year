@@ -25,7 +25,7 @@ module FiscalYear
     end
 
     def cross_year?
-      self.months.rindex(1) != 0
+      months.rindex(1) != 0
     end
 
     def months
@@ -34,24 +34,23 @@ module FiscalYear
 
     def cross_year_months
       return [] if @config.start_month == 1
+
       rindex = months.rindex(1).to_i
 
       m = months.slice(rindex, months.length)
-      if m.nil?
-        raise StandardError
-      else
-        m
-      end
+      raise StandardError if m.nil?
+
+      m
     end
 
     def halfs
       # @type self: singleton(FiscalYear)
-      self::months.in_groups(2)
+      months.in_groups(2)
     end
 
     def quarters
       # @type self: singleton(FiscalYear)
-      self::months.in_groups(4)
+      months.in_groups(4)
     end
   end
 end
