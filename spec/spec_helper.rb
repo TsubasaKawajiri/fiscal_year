@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "fiscal_year"
-require 'simplecov'
+require "simplecov"
 SimpleCov.start
 
 RSpec.configure do |config|
