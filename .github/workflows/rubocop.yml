@@ -1,4 +1,4 @@
-name: Ruby
+name: RuboCop
 
 on:
   push:
@@ -6,6 +6,9 @@ on:
       - master
 
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -23,5 +26,6 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
-    - name: Run the default task
-      run: bundle exec rake
+    - name: Run RuboCop
+      run: bundle exec rubocop
+
