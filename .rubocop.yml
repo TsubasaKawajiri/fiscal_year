@@ -2,6 +2,7 @@ AllCops:
   TargetRubyVersion: 2.6
   Exclude:
     - 'Steepfile'
+    - 'vendor/**/*'
   NewCops: enable
 
 Style/StringLiterals:
