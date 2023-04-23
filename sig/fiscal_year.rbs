@@ -1,13 +1,13 @@
 module FiscalYear
   VERSION: String
   @config: FiscalYear::Config
-  attr_reader config: FiscalYear::Config
 
-  def configure: () { (FiscalYear::Config) -> void } -> void | -> void
-  def cross_year_month?: (Integer) -> String
-  def cross_year?: () -> bool
-  def months: () -> Array[Integer]
-  def cross_year_months: () -> Array[Integer]
-  def halfs: () -> Array[Integer]
-  def quarters: () -> Array[Integer]
+  attr_reader self.config: FiscalYear::Config
+  def self.configure: () { (FiscalYear::Config) -> void } -> void | -> void
+  def self.cross_year_month?: (Integer) -> bool
+  def self.cross_year?: () -> bool
+  def self.months: -> Array[Integer]
+  def self.cross_year_months: () -> Array[Integer]
+  def self.halfs: () -> [Array[Integer], Array[Integer]]
+  def self.quarters: () -> [Array[Integer], Array[Integer], Array[Integer], Array[Integer]]
 end

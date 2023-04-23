@@ -1,7 +1,7 @@
 module FiscalYear
   class Half
-    def self.first: () -> Array[Integer]
-    def self.second: () -> Array[Integer]
+    def self.first: () -> Array[Integer] | -> Array[untyped]
+    def self.second: () -> Array[Integer] | -> Array[untyped]
     def self.first?: (Integer) -> bool
     def self.second?: (Integer) -> bool
     def self.first_range_by: (Integer) -> Range[Date]

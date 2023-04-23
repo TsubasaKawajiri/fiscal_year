@@ -1,7 +1,7 @@
 module FiscalYear
   class YearToDate
     def self.range_by: (Date) -> Range[Date]
-    def self.year_month_pairs: (Date) -> Array[Hash[Integer, Integer]]
+    def self.year_month_pairs: (Date) -> Array[[Integer, Integer]]
     def self.half_range_by: (Date) -> Range[Date]
     def self.quarter_range_by: (Date) -> Range[Date]
   end
