@@ -14,7 +14,8 @@ module FiscalYear
         end
       end
 
-      def year_month_pairs(date)
+      # TODO: fit to Abc size
+      def year_month_pairs(date) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         month = date.month
         month_index = FiscalYear.months.index(month)
         months = FiscalYear.months[(0..month_index)]

@@ -6,8 +6,6 @@ module FiscalYear
 
     def initialize
       @start_month = 4
-
-      self
     end
   end
 end
