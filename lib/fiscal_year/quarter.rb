@@ -26,7 +26,10 @@ module FiscalYear
       end
 
       def months(month)
-        FiscalYear.quarters.find { |a| a.include?(month) }
+        months = FiscalYear.quarters.find { |a| a.include?(month) }
+        raise ::StandardError if months.nil?
+
+        months
       end
 
       def range_by(date)
@@ -38,7 +41,9 @@ module FiscalYear
       end
 
       def quater_num(month)
-        (FiscalYear.quarters.rindex(months(month)) + 1)
+        rindex = FiscalYear.quarters.rindex(months(month))
+
+        rindex.nil? ? 0 : (rindex + 1)
       end
 
       def cross_year_in_quarter?(quarter)

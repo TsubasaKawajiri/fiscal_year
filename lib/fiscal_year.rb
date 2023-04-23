@@ -11,8 +11,8 @@ require "active_support"
 require "active_support/core_ext"
 
 module FiscalYear
+  # @type ivar @config: FiscalYear::Config
   @config ||= FiscalYear::Config.new
-
   class << self
     attr_reader :config
 
@@ -35,14 +35,21 @@ module FiscalYear
     def cross_year_months
       return [] if @config.start_month == 1
 
-      months.slice(months.rindex(1), months.length)
+      rindex = months.rindex(1).to_i
+
+      m = months.slice(rindex, months.length)
+      raise StandardError if m.nil?
+
+      m
     end
 
     def halfs
+      # @type self: singleton(FiscalYear)
       months.in_groups(2)
     end
 
     def quarters
+      # @type self: singleton(FiscalYear)
       months.in_groups(4)
     end
   end

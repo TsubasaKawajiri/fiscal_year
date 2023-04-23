@@ -14,11 +14,15 @@ module FiscalYear
         end
       end
 
-      def year_month_pairs(date)
+      # TODO: fit to Abc size
+      def year_month_pairs(date) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         month = date.month
+        month_index = FiscalYear.months.index(month)
+        months = FiscalYear.months[(0..month_index)]
+        raise StandardError if months.nil?
 
         pair = []
-        [date.year].product(FiscalYear.months.slice(0..FiscalYear.months.index(month))) do |e|
+        [date.year].product(months).each do |e|
           pair << if FiscalYear.cross_year_month?(month)
                     (FiscalYear.cross_year_month?(e.second) ? e : [e.first - 1, e.second])
                   else

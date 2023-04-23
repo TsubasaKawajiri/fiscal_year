@@ -4,11 +4,17 @@ module FiscalYear
   class Half
     class << self
       def first
-        FiscalYear.halfs.first
+        first = FiscalYear.halfs.first
+        return first if first.is_a? Array
+
+        []
       end
 
       def second
-        FiscalYear.halfs.second
+        second = FiscalYear.halfs.second
+        return second if second.is_a? Array
+
+        []
       end
 
       def first?(month)
@@ -23,19 +29,26 @@ module FiscalYear
         # care Date#parse 2 digit year auto complete.
         # 99 + 1 = 100, but expect 2000 this context.
         year = 1999 if year == 99
-        end_year = normalize_year_by_month(year, first.last)
+        end_month = first.last
+        raise StandardError if end_month.nil?
 
-        Date.parse("#{year}/#{first.first}/01")..Date.parse("#{end_year}/#{first.last}/01").end_of_month
+        end_year = normalize_year_by_month(year, end_month)
+
+        Date.parse("#{year}/#{first.first}/01")..Date.parse("#{end_year}/#{end_month}/01").end_of_month
       end
 
       def second_range_by(year)
         # care Date#parse 2 digit year auto complete.
         # 99 + 1 = 100, but expect 2000 this context.
         year = 1999 if year == 99
-        start_year = normalize_year_by_month(year, second.first)
-        end_year = normalize_year_by_month(year, second.last)
+        first_month = second.first
+        end_month = second.last
+        raise StandardError if first_month.nil? || end_month.nil?
 
-        Date.parse("#{start_year}/#{second.first}/01")..Date.parse("#{end_year}/#{second.last}/01").end_of_month
+        start_year = normalize_year_by_month(year, first_month)
+        end_year = normalize_year_by_month(year, end_month)
+
+        Date.parse("#{start_year}/#{first_month}/01")..Date.parse("#{end_year}/#{end_month}/01").end_of_month
       end
 
       def range_by(date)
