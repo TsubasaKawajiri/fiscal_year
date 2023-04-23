@@ -5,28 +5,31 @@ module FiscalYear
     class << self
       %i[first second third fourth].each do |method_name|
         define_method(method_name) do
-          FiscalYear.quarters.public_send(method_name)
+          FiscalYear::quarters.public_send(method_name)
         end
       end
 
       def first?(month)
-        FiscalYear.quarters.first.include?(month)
+        FiscalYear::quarters.first.include?(month)
       end
 
       def second?(month)
-        FiscalYear.quarters.second.include?(month)
+        FiscalYear::quarters.second.include?(month)
       end
 
       def third?(month)
-        FiscalYear.quarters.third.include?(month)
+        FiscalYear::quarters.third.include?(month)
       end
 
       def fourth?(month)
-        FiscalYear.quarters.fourth.include?(month)
+        FiscalYear::quarters.fourth.include?(month)
       end
 
       def months(month)
-        FiscalYear.quarters.find { |a| a.include?(month) }
+        months = FiscalYear::quarters.find { |a| a.include?(month) }
+        raise ::StandardError if months.nil?
+
+        months
       end
 
       def range_by(date)
@@ -38,11 +41,13 @@ module FiscalYear
       end
 
       def quater_num(month)
-        (FiscalYear.quarters.rindex(months(month)) + 1)
+        rindex = FiscalYear::quarters.rindex(months(month))
+
+        rindex.nil? ? 0 : (rindex + 1)
       end
 
       def cross_year_in_quarter?(quarter)
-        FiscalYear.cross_year? && quarter.any? { |month| month == 12 }
+        FiscalYear::cross_year? && quarter.any? { |month| month == 12 }
       end
     end
   end

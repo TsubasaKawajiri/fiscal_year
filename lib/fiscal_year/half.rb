@@ -4,15 +4,21 @@ module FiscalYear
   class Half
     class << self
       def first
-        FiscalYear.halfs.first
+        first = FiscalYear::halfs.first
+        return first if first.is_a? Array
+
+        []
       end
 
       def second
-        FiscalYear.halfs.second
+        second = FiscalYear::halfs.second
+        return second if second.is_a? Array
+
+        []
       end
 
       def first?(month)
-        FiscalYear.halfs.first.include?(month)
+        FiscalYear::halfs.first.include?(month)
       end
 
       def second?(month)
@@ -23,32 +29,37 @@ module FiscalYear
         # care Date#parse 2 digit year auto complete.
         # 99 + 1 = 100, but expect 2000 this context.
         year = 1999 if year == 99
-        end_year = normalize_year_by_month(year, first.last)
+        end_month = first.last
+        raise StandardError if end_month.nil?
+        end_year = normalize_year_by_month(year, end_month)
 
-        Date.parse("#{year}/#{first.first}/01")..Date.parse("#{end_year}/#{first.last}/01").end_of_month
+        Date.parse("#{year}/#{first.first}/01")..Date.parse("#{end_year}/#{end_month}/01").end_of_month
       end
 
       def second_range_by(year)
         # care Date#parse 2 digit year auto complete.
         # 99 + 1 = 100, but expect 2000 this context.
         year = 1999 if year == 99
-        start_year = normalize_year_by_month(year, second.first)
-        end_year = normalize_year_by_month(year, second.last)
+        first_month = second.first
+        end_month = second.last
+        raise StandardError if first_month.nil? || end_month.nil?
+        start_year = normalize_year_by_month(year, first_month)
+        end_year = normalize_year_by_month(year, end_month)
 
-        Date.parse("#{start_year}/#{second.first}/01")..Date.parse("#{end_year}/#{second.last}/01").end_of_month
+        Date.parse("#{start_year}/#{first_month}/01")..Date.parse("#{end_year}/#{end_month}/01").end_of_month
       end
 
       def range_by(date)
         month = date.month
         year = date.year
         # if passed crossed year value, normalize to not crossed year value
-        year -= 1 if FiscalYear.cross_year_month?(month)
+        year -= 1 if FiscalYear::cross_year_month?(month)
 
         first?(month) ? first_range_by(year) : second_range_by(year)
       end
 
       def normalize_year_by_month(year, month)
-        if FiscalYear.cross_year_month?(month)
+        if FiscalYear::cross_year_month?(month)
           year + 1
         else
           year
@@ -56,7 +67,7 @@ module FiscalYear
       end
 
       def cross_year_in_half?(half)
-        FiscalYear.cross_year? && half.any? { |month| month == 12 }
+        FiscalYear::cross_year? && half.any? { |month| month == 12 }
       end
     end
   end
