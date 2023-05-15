@@ -34,13 +34,13 @@ module FiscalYear
 
       def range_by(date)
         year = date.year
-        this_quater = months(date.month)
-        last_year = cross_year_in_quarter?(this_quater) ? year + 1 : year
+        this_quarter = months(date.month)
+        last_year = cross_year_in_quarter?(this_quarter) ? year + 1 : year
 
-        Date.parse("#{year}/#{this_quater.first}/01")..Date.parse("#{last_year}/#{this_quater.last}/01").end_of_month
+        Date.parse("#{year}/#{this_quarter.first}/01")..Date.parse("#{last_year}/#{this_quarter.last}/01").end_of_month
       end
 
-      def quater_num(month)
+      def quarter_num(month)
         rindex = FiscalYear.quarters.rindex(months(month))
 
         rindex.nil? ? 0 : (rindex + 1)
