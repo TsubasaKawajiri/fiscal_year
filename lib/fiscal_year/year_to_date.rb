@@ -34,7 +34,7 @@ module FiscalYear
       end
 
       # TODO: fit to Abc size
-      def half_range_by(date) # rubocop:disable Metrics/AbcSize
+      def half_range_by(date) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         year = date.year
         month = date.month
 
@@ -45,7 +45,14 @@ module FiscalYear
         end
 
         Date.parse(
-          "#{FiscalYear::Half.cross_year_in_half?(Half.second) ? year - 1 : year}/#{Half.second.first}"
+          "#{
+              if FiscalYear::Half.cross_year_in_half?(Half.second) &&
+              FiscalYear.cross_year_month?(month)
+                year - 1
+              else
+                year
+              end
+            }/#{Half.second.first}"
         )..date.end_of_month.to_date
       end
 
