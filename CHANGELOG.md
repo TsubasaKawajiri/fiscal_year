@@ -1,3 +1,6 @@
+## [0.4.0] - 2023-06-15
+- fix calculate logic of half year to date
+
 ## [0.3.0] - 2023-04-23
 - add rbs
   - fit to rbs
