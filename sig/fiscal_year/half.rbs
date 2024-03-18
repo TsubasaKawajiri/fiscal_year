@@ -7,7 +7,7 @@ module FiscalYear
     def self.first_range_by: (Integer) -> Range[Date]
     def self.second_range_by: (Integer) -> Range[Date]
     def self.range_by: (Date) -> Range[Date]
-    def self.normalize_year_by_month: (Integer, Integer) -> Integer
+    def self.increase_year_by_month: (Integer, Integer) -> Integer
     def self.cross_year_in_half?: (Array[Integer]) -> bool
   end
 end

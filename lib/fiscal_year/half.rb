@@ -32,7 +32,7 @@ module FiscalYear
         end_month = first.last
         raise StandardError if end_month.nil?
 
-        end_year = normalize_year_by_month(year, end_month)
+        end_year = increase_year_by_month(year, end_month)
 
         Date.parse("#{year}/#{first.first}/01")..Date.parse("#{end_year}/#{end_month}/01").end_of_month
       end
@@ -45,8 +45,8 @@ module FiscalYear
         end_month = second.last
         raise StandardError if first_month.nil? || end_month.nil?
 
-        start_year = normalize_year_by_month(year, first_month)
-        end_year = normalize_year_by_month(year, end_month)
+        start_year = increase_year_by_month(year, first_month)
+        end_year = increase_year_by_month(year, end_month)
 
         Date.parse("#{start_year}/#{first_month}/01")..Date.parse("#{end_year}/#{end_month}/01").end_of_month
       end
@@ -60,7 +60,7 @@ module FiscalYear
         first?(month) ? first_range_by(year) : second_range_by(year)
       end
 
-      def normalize_year_by_month(year, month)
+      def increase_year_by_month(year, month)
         if FiscalYear.cross_year_month?(month)
           year + 1
         else
