@@ -55,7 +55,7 @@ module FiscalYear
         month = date.month
         year = date.year
         # if passed crossed year value, normalize to not crossed year value
-        year -= 1 if FiscalYear.cross_year_month?(month)
+        year = decrease_year_by_month(year, month)
 
         first?(month) ? first_range_by(year) : second_range_by(year)
       end
@@ -63,6 +63,14 @@ module FiscalYear
       def increase_year_by_month(year, month)
         if FiscalYear.cross_year_month?(month)
           year + 1
+        else
+          year
+        end
+      end
+
+      def decrease_year_by_month(year, month)
+        if FiscalYear.cross_year_month?(month)
+          year - 1
         else
           year
         end
