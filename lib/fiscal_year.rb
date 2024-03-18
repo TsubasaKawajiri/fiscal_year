@@ -52,5 +52,21 @@ module FiscalYear
       # @type self: singleton(FiscalYear)
       months.in_groups(4)
     end
+
+    def increase_year_by_month(year, month)
+      if FiscalYear.cross_year_month?(month)
+        year + 1
+      else
+        year
+      end
+    end
+
+    def decrease_year_by_month(year, month)
+      if FiscalYear.cross_year_month?(month)
+        year - 1
+      else
+        year
+      end
+    end
   end
 end
