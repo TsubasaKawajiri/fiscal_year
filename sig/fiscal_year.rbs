@@ -10,4 +10,6 @@ module FiscalYear
   def self.cross_year_months: () -> Array[Integer]
   def self.halfs: () -> [Array[Integer], Array[Integer]]
   def self.quarters: () -> [Array[Integer], Array[Integer], Array[Integer], Array[Integer]]
+  def self.increase_year_by_month: (Integer, Integer) -> Integer
+  def self.decrease_year_by_month: (Integer, Integer) -> Integer
 end
