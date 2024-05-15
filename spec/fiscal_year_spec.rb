@@ -248,4 +248,203 @@ RSpec.describe FiscalYear do
       end
     end
   end
+
+  describe "#range_by" do
+    it "Rangeを返す" do
+      expect(FiscalYear.range_by(Date.parse("2000/01/01")).class).to be Range
+    end
+
+    it "Range始端がDateである" do
+      expect(FiscalYear.range_by(Date.parse("2000/01/01")).first.class).to be Date
+    end
+
+    it "Range終端がDateである" do
+      expect(FiscalYear.range_by(Date.parse("2000/01/01")).last.class).to be Date
+    end
+
+    context "年度始まりが4月の場合" do
+      include_context "fiscal_year_start_apr"
+
+      context "2000年4月のとき" do
+        let(:range) { FiscalYear.range_by(Date.parse("2000/04/01")) }
+        it "Range始端は2000年である" do
+          expect(range.first.year).to be 2000
+        end
+
+        it "Range始端は4月である" do
+          expect(range.first.month).to be 4
+        end
+
+        it "Range終端は2001年である" do
+          expect(range.last.year).to be 2001
+        end
+
+        it "Range終端は3月である" do
+          expect(range.last.month).to be 3
+        end
+      end
+
+      context "2000年10月のとき" do
+        include_context "fiscal_year_start_apr"
+        let(:range) { FiscalYear.range_by(Date.parse("2000/10/01")) }
+        it "Range始端は2000年である" do
+          expect(range.first.year).to be 2000
+        end
+
+        it "Range始端は4月である" do
+          expect(range.first.month).to be 4
+        end
+
+        it "Range終端は2001年である" do
+          expect(range.last.year).to be 2001
+        end
+
+        it "Range終端は3月である" do
+          expect(range.last.month).to be 3
+        end
+      end
+
+      context "2001年1月のとき" do
+        include_context "fiscal_year_start_apr"
+        let(:range) { FiscalYear.range_by(Date.parse("2001/01/01")) }
+        it "Range始端は2000年である" do
+          expect(range.first.year).to be 2000
+        end
+
+        it "Range始端は4月である" do
+          expect(range.first.month).to be 4
+        end
+
+        it "Range終端は2001年である" do
+          expect(range.last.year).to be 2001
+        end
+
+        it "Range終端は3月である" do
+          expect(range.last.month).to be 3
+        end
+      end
+    end
+
+    context "年度始まりが1月の場合" do
+      include_context "fiscal_year_start_jan"
+
+      context "2000年1月のとき" do
+        let(:range) { FiscalYear.range_by(Date.parse("2000/01/01")) }
+        it "Range始端は2000年である" do
+          expect(range.first.year).to be 2000
+        end
+
+        it "Range始端は1月である" do
+          expect(range.first.month).to be 1
+        end
+
+        it "Range終端は2000年である" do
+          expect(range.last.year).to be 2000
+        end
+
+        it "Range終端は12月である" do
+          expect(range.last.month).to be 12
+        end
+      end
+
+      context "2000年10月のとき" do
+        let(:range) { FiscalYear.range_by(Date.parse("2000/10/01")) }
+        it "Range始端は2000年である" do
+          expect(range.first.year).to be 2000
+        end
+
+        it "Range始端は1月である" do
+          expect(range.first.month).to be 1
+        end
+
+        it "Range終端は2000年である" do
+          expect(range.last.year).to be 2000
+        end
+
+        it "Range終端は12月である" do
+          expect(range.last.month).to be 12
+        end
+      end
+
+      context "1999年12月のとき" do
+        let(:range) { FiscalYear.range_by(Date.parse("1999/12/01")) }
+        it "Range始端は1999年である" do
+          expect(range.first.year).to be 1999
+        end
+
+        it "Range始端は1月である" do
+          expect(range.first.month).to be 1
+        end
+
+        it "Range終端は1999年である" do
+          expect(range.last.year).to be 1999
+        end
+
+        it "Range終端は12月である" do
+          expect(range.last.month).to be 12
+        end
+      end
+    end
+
+    context "年度開始が12月の場合" do
+      include_context "fiscal_year_start_dec"
+
+      context "2000年1月のとき" do
+        let(:range) { FiscalYear.range_by(Date.parse("2000/01/01")) }
+        it "Range始端は1999年である" do
+          expect(range.first.year).to be 1999
+        end
+
+        it "Range始端は12月である" do
+          expect(range.first.month).to be 12
+        end
+
+        it "Range終端は2000年である" do
+          expect(range.last.year).to be 2000
+        end
+
+        it "Range終端は11月である" do
+          expect(range.last.month).to be 11
+        end
+      end
+
+      context "2000年10月のとき" do
+        let(:range) { FiscalYear.range_by(Date.parse("2000/10/01")) }
+        it "Range始端は1999年である" do
+          expect(range.first.year).to be 1999
+        end
+
+        it "Range始端は12月である" do
+          expect(range.first.month).to be 12
+        end
+
+        it "Range終端は2000年である" do
+          expect(range.last.year).to be 2000
+        end
+
+        it "Range終端は11月である" do
+          expect(range.last.month).to be 11
+        end
+      end
+
+      context "1999年12月のとき" do
+        let(:range) { FiscalYear.range_by(Date.parse("1999/12/01")) }
+        it "Range始端は1999年である" do
+          expect(range.first.year).to be 1999
+        end
+
+        it "Range始端は12月である" do
+          expect(range.first.month).to be 12
+        end
+
+        it "Range終端は2000年である" do
+          expect(range.last.year).to be 2000
+        end
+
+        it "Range終端は11月である" do
+          expect(range.last.month).to be 11
+        end
+      end
+    end
+  end
 end

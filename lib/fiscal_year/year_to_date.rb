@@ -21,16 +21,13 @@ module FiscalYear
         months = FiscalYear.months[(0..month_index)]
         raise StandardError if months.nil?
 
-        pair = []
-        [date.year].product(months).each do |e|
-          pair << if FiscalYear.cross_year_month?(month)
-                    (FiscalYear.cross_year_month?(e.second) ? e : [e.first - 1, e.second])
-                  else
-                    e
-                  end
+        [date.year].product(months).map do |e|
+          if FiscalYear.cross_year_month?(month)
+            (FiscalYear.cross_year_month?(e.second) ? e : [e.first - 1, e.second])
+          else
+            e
+          end
         end
-
-        pair
       end
 
       # TODO: fit to Abc size

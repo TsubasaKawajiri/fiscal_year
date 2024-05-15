@@ -68,5 +68,13 @@ module FiscalYear
         year
       end
     end
+
+    def range_by(date)
+      year = date.year
+      month = date.month
+      normalized_year = decrease_year_by_month(year, month)
+
+      FiscalYear::Half.first_range_by(normalized_year).first..FiscalYear::Half.second_range_by(normalized_year).last
+    end
   end
 end
