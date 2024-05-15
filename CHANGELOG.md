@@ -1,3 +1,7 @@
+## [0.6.0] - 2024-05-15
+- [BREAK] Ruby 3.0.x, 2.7.x and 2.6.x has no longer support.
+- add `FiscalYear.range_by` method
+
 ## [0.5.0] - 2024-03-18
 - [BREAK] rename and move `FiscalYear::Half.normalize_year_by_month` to `FiscalYear.increase_year_by_month`
 - add `FiscalYear.decrease_year_by_month` method
