@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "fiscal year, quarter, year to date calculate"
   spec.homepage = "https://github.com/TsubasaKawajiri/fiscal_year"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.required_ruby_version = ">= 3.1.0"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
