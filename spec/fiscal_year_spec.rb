@@ -266,7 +266,7 @@ RSpec.describe FiscalYear do
       include_context "fiscal_year_start_apr"
 
       context "2000年4月のとき" do
-        let(:range) { FiscalYear::range_by(Date.parse("2000/04/01")) }
+        let(:range) { FiscalYear.range_by(Date.parse("2000/04/01")) }
         it "Range始端は2000年である" do
           expect(range.first.year).to be 2000
         end
@@ -286,7 +286,7 @@ RSpec.describe FiscalYear do
 
       context "2000年10月のとき" do
         include_context "fiscal_year_start_apr"
-        let(:range) { FiscalYear::range_by(Date.parse("2000/10/01")) }
+        let(:range) { FiscalYear.range_by(Date.parse("2000/10/01")) }
         it "Range始端は2000年である" do
           expect(range.first.year).to be 2000
         end
@@ -306,7 +306,7 @@ RSpec.describe FiscalYear do
 
       context "2001年1月のとき" do
         include_context "fiscal_year_start_apr"
-        let(:range) { FiscalYear::range_by(Date.parse("2001/01/01")) }
+        let(:range) { FiscalYear.range_by(Date.parse("2001/01/01")) }
         it "Range始端は2000年である" do
           expect(range.first.year).to be 2000
         end
