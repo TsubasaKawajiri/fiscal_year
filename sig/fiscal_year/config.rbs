@@ -1,5 +1,6 @@
 module FiscalYear
   class Config
     attr_reader start_month: Integer
+    def initialize: -> Integer
   end
 end
