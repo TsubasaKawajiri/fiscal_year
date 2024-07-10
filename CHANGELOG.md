@@ -1,3 +1,7 @@
+## [0.7.0] - 2024-07-11
+- add YARD comment.
+- fix `FiscalYear::YearToDate.quarter_range_by` logic.
+
 ## [0.6.0] - 2024-05-15
 - [BREAK] Ruby 3.0.x, 2.7.x and 2.6.x has no longer support.
 - add `FiscalYear.range_by` method
