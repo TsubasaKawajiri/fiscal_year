@@ -14,41 +14,31 @@ module FiscalYear
         end
       end
 
-      def year_month_pairs(date) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      def year_month_pairs(date)
         month = date.month
         month_index = FiscalYear.months.index(month)
         months = FiscalYear.months[(0..month_index)]
         raise StandardError if months.nil?
 
         [date.year].product(months).map do |e|
-          if FiscalYear.cross_year_month?(month)
-            (FiscalYear.cross_year_month?(e.second) ? e : [e.first - 1, e.second])
-          else
-            e
-          end
+          [FiscalYear.decrease_year_by_month(e.first, e.second), e.second]
         end
       end
 
-      def half_range_by(date) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      def half_range_by(date)
         year = date.year
         month = date.month
 
-        if Half.first?(month)
-          return (Date.parse("#{FiscalYear.cross_year_month?(month) ? year - 1 : year}/#{Half.first.first}/01")..
-            date.end_of_month.to_date
-                 )
-        end
+        begining_year =
+          if Half.first?(month)
+            FiscalYear.cross_year_month?(month) ? year - 1 : year
+          else
+            Half.cross_year_in_half?(Half.second) ? FiscalYear.decrease_year_by_month(year, month) : year
+          end
 
-        Date.parse(
-          "#{
-              if FiscalYear::Half.cross_year_in_half?(Half.second) &&
-              FiscalYear.cross_year_month?(month)
-                year - 1
-              else
-                year
-              end
-            }/#{Half.second.first}"
-        )..date.end_of_month.to_date
+        half_method = Half.first?(month) ? :first : :second
+
+        Date.parse("#{begining_year}/#{Half.public_send(half_method).first}/01")..date.end_of_month.to_date
       end
 
       def quarter_range_by(date)
