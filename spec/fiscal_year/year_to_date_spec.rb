@@ -487,6 +487,25 @@ RSpec.describe FiscalYear::YearToDate do
           expect(range.last.month).to be 8
         end
       end
+
+      context "2000年1月のとき" do
+        let(:range) { FiscalYear::YearToDate.quarter_range_by(Date.parse("2000/01/01")) }
+        it "Range始端は2000年である" do
+          expect(range.first.year).to be 2000
+        end
+
+        it "Range始端は1月である" do
+          expect(range.first.month).to be 1
+        end
+
+        it "Range終端は2000年である" do
+          expect(range.last.year).to be 2000
+        end
+
+        it "Range終端は1月である" do
+          expect(range.last.month).to be 1
+        end
+      end
     end
 
     context "年度開始が12月の場合" do

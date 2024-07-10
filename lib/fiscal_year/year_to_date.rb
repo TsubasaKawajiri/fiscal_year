@@ -14,7 +14,6 @@ module FiscalYear
         end
       end
 
-      # TODO: fit to Abc size
       def year_month_pairs(date) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         month = date.month
         month_index = FiscalYear.months.index(month)
@@ -30,7 +29,6 @@ module FiscalYear
         end
       end
 
-      # TODO: fit to Abc size
       def half_range_by(date) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         year = date.year
         month = date.month
@@ -63,10 +61,10 @@ module FiscalYear
 
         quarter = Quarter.public_send(quarter_method)
 
-        (
-          Date.parse("#{FiscalYear.cross_year_month?(month) ? year - 1 : year}/#{quarter.first}/01")..
-          date.end_of_month.to_date
-        )
+        begining_year =
+          Quarter.cross_year_in_quarter?(quarter) ? FiscalYear.decrease_year_by_month(year, month) : year
+
+        Date.parse("#{begining_year}/#{quarter.first}/01")..date.end_of_month.to_date
       end
     end
   end
