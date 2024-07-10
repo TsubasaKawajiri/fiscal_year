@@ -29,7 +29,7 @@ module FiscalYear
         year = date.year
         month = date.month
 
-        begining_year =
+        beginning_year =
           if Half.first?(month)
             FiscalYear.cross_year_month?(month) ? year - 1 : year
           else
@@ -38,7 +38,7 @@ module FiscalYear
 
         half_method = Half.first?(month) ? :first : :second
 
-        Date.parse("#{begining_year}/#{Half.public_send(half_method).first}/01")..date.end_of_month.to_date
+        Date.parse("#{beginning_year}/#{Half.public_send(half_method).first}/01")..date.end_of_month.to_date
       end
 
       def quarter_range_by(date)
@@ -51,10 +51,10 @@ module FiscalYear
 
         quarter = Quarter.public_send(quarter_method)
 
-        begining_year =
+        beginning_year =
           Quarter.cross_year_in_quarter?(quarter) ? FiscalYear.decrease_year_by_month(year, month) : year
 
-        Date.parse("#{begining_year}/#{quarter.first}/01")..date.end_of_month.to_date
+        Date.parse("#{beginning_year}/#{quarter.first}/01")..date.end_of_month.to_date
       end
     end
   end
