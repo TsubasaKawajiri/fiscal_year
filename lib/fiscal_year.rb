@@ -14,24 +14,40 @@ module FiscalYear
   # @type ivar @config: FiscalYear::Config
   @config ||= FiscalYear::Config.new
   class << self
+    # @return [FiscalYear::Config]
     attr_reader :config
 
+    # configure start month of fiscal year.
+    #
+    # @yieldparam config [FiscalYear::Config]
+    # @example
+    #  FiscalYear.configure do |config|
+    #    config.start_month = 6
+    #  end
     def configure
       yield(@config) if block_given?
     end
 
+    # If the fiscal year start from 4, the month 1, 2, 3 are crossed year.
+    #
+    # @param month [Integer] the month to check, 1-12.
+    # @return [Boolean] true if the month is crossed year on calendar year.
+    # Determines if the month passed is beyond the year, By relative to the beginning month of the fiscal year.
     def cross_year_month?(month)
       cross_year_months.include?(month)
     end
 
+    # @return [Boolean] true if the fiscal year is crossed year.
     def cross_year?
       months.rindex(1) != 0
     end
 
+    # @return [Array<Integer>] the months of the fiscal year.
     def months
       (1..12).to_a.tap { |arr| arr.concat(arr.shift(@config.start_month - 1)) }
     end
 
+    # @return [Array<Integer>] the months of the crossed year.
     def cross_year_months
       return [] if @config.start_month == 1
 
@@ -43,16 +59,25 @@ module FiscalYear
       m
     end
 
+    # @return [Array(Array<Integer>, Array<Integer>)] the first half and the second half of the fiscal year.
     def halfs
       # @type self: singleton(FiscalYear)
       months.in_groups(2)
     end
 
+    # @return [Array(Array<Integer>, Array<Integer>, Array<Integer>, Array<Integer>)] the quarters of the fiscal year.
     def quarters
       # @type self: singleton(FiscalYear)
       months.in_groups(4)
     end
 
+    # increate the calendar year by month, if the month is crossed year.
+    #
+    # for example, in case of the fiscal year start from 4, you want to obtain calendar year of the month 1, 2, 3.
+    #
+    # @param year [Integer] the calendar year
+    # @param month [Integer] the month
+    # @return [Integer] year
     def increase_year_by_month(year, month)
       if FiscalYear.cross_year_month?(month)
         year + 1
@@ -61,6 +86,13 @@ module FiscalYear
       end
     end
 
+    # decrease the calendar year by month, if the month is crossed year.
+    #
+    # for example, in case of the fiscal year start from 4, you want to obtain fiscal year from the month 1, 2, 3.
+    #
+    # @param year [Integer] the calendar year
+    # @param month [Integer] the month
+    # @return [Integer] year
     def decrease_year_by_month(year, month)
       if FiscalYear.cross_year_month?(month)
         year - 1
@@ -69,6 +101,8 @@ module FiscalYear
       end
     end
 
+    # @param date [Date] the date
+    # @return [Range<Date>] the range of the fiscal year between beginning and end by the date.
     def range_by(date)
       year = date.year
       month = date.month
