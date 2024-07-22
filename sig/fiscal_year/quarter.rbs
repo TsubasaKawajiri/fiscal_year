@@ -12,5 +12,7 @@ module FiscalYear
     def self.range_by: (Date) -> Range[Date]
     def self.quarter_num: (Integer) -> Integer
     def self. cross_year_in_quarter?: (Array[Integer]) -> bool
+    def self.passed_month_count_by: (Date) -> Integer
+    def self.passed_month_count_by_month: (Integer) -> Integer
   end
 end

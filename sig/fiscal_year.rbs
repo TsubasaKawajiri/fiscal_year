@@ -12,5 +12,7 @@ module FiscalYear
   def self.quarters: () -> [Array[Integer], Array[Integer], Array[Integer], Array[Integer]]
   def self.increase_year_by_month: (Integer, Integer) -> Integer
   def self.decrease_year_by_month: (Integer, Integer) -> Integer
-  def self.range_by: (Date) -> Range
+  def self.range_by: (Date) -> Range[Date]
+  def self.passed_month_count_by: (Date) -> Integer
+  def self.passed_month_count_by_month: (Integer) -> Integer
 end

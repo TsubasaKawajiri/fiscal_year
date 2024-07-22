@@ -31,6 +31,12 @@ module FiscalYear
         !first?(month)
       end
 
+      # @param month [Integer] the month
+      # @return [Array<Integer>] the half months by the month.
+      def months(month)
+        first?(month) ? first : second
+      end
+
       # @param year [Integer] the calendar year
       # @return [Range<Date>] the range of the first half of the fiscal year.
       def first_range_by(year)
@@ -76,6 +82,24 @@ module FiscalYear
       # @return [Boolean] true if the any month of half are crossed calendar year.
       def cross_year_in_half?(half)
         FiscalYear.cross_year? && half.any? { |month| month == 12 }
+      end
+
+      # start by 0.
+      #
+      # @see passed_month_count_by_month
+      # @param date [Date] the date
+      # @return [Integer] the passed month count from the beginning of the half.
+      def passed_month_count_by(date)
+        passed_month_count_by_month(date.month)
+      end
+
+      # start by 0.
+      #
+      # @see passed_month_count_by_month
+      # @param date [Date] the date
+      # @return [Integer] the passed month count from the beginning of the half.
+      def passed_month_count_by_month(month)
+        months(month).find_index(month) || raise(StandardError)
       end
     end
   end
