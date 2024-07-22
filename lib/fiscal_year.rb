@@ -112,7 +112,7 @@ module FiscalYear
     end
 
     # start by 0.
-    # 
+    #
     # @see passed_month_count_by_month
     # @param date [Date] the date
     # @return [Integer] the passed month count from the beginning of the fiscal year.
