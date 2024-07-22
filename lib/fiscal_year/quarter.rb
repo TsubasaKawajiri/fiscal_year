@@ -76,6 +76,22 @@ module FiscalYear
       def cross_year_in_quarter?(quarter)
         FiscalYear.cross_year? && quarter.any? { |month| month == 12 }
       end
+
+      # start by 0.
+      #
+      # @param date [Date] the date
+      # @return [Integer] the passed quarter count by the date.
+      def passed_month_count_by(date)
+        passed_month_count_by_month(date.month)
+      end
+
+      # start by 0.
+      #
+      # @param month [Integer] the month
+      # @return [Integer] the passed quarter count by the month.
+      def passed_month_count_by_month(month)
+        months(month).find_index(month) || raise(StandardError)
+      end
     end
   end
 end

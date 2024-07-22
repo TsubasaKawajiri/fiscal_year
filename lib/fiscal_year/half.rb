@@ -83,6 +83,24 @@ module FiscalYear
       def cross_year_in_half?(half)
         FiscalYear.cross_year? && half.any? { |month| month == 12 }
       end
+
+      # start by 0.
+      #
+      # @see passed_month_count_by_month
+      # @param date [Date] the date
+      # @return [Integer] the passed month count from the beginning of the half.
+      def passed_month_count_by(date)
+        passed_month_count_by_month(date.month)
+      end
+
+      # start by 0.
+      #
+      # @see passed_month_count_by_month
+      # @param date [Date] the date
+      # @return [Integer] the passed month count from the beginning of the half.
+      def passed_month_count_by_month(month)
+        months(month).find_index(month) || raise(StandardError)
+      end
     end
   end
 end

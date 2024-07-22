@@ -9,5 +9,7 @@ module FiscalYear
     def self.second_range_by: (Integer) -> Range[Date]
     def self.range_by: (Date) -> Range[Date]
     def self.cross_year_in_half?: (Array[Integer]) -> bool
+    def self.passed_month_count_by: (Date) -> Integer
+    def self.passed_month_count_by_month: (Integer) -> Integer
   end
 end

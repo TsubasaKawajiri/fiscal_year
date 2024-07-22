@@ -447,4 +447,140 @@ RSpec.describe FiscalYear do
       end
     end
   end
+
+  describe "#passed_month_count_by" do
+    context "年度開始が4月の場合" do
+      include_context "fiscal_year_start_apr"
+
+      context "2000年4月のとき" do
+        it "0を返す" do
+          expect(FiscalYear.passed_month_count_by(Date.parse("2000/04/01"))).to be 0
+        end
+      end
+
+      context "2000年10月のとき" do
+        it "6を返す" do
+          expect(FiscalYear.passed_month_count_by(Date.parse("2000/10/01"))).to be 6
+        end
+      end
+
+      context "2001年1月のとき" do
+        it "9を返す" do
+          expect(FiscalYear.passed_month_count_by(Date.parse("2001/01/01"))).to be 9
+        end
+      end
+    end
+
+    context "年度開始が1月の場合" do
+      include_context "fiscal_year_start_jan"
+
+      context "2000年1月のとき" do
+        it "0を返す" do
+          expect(FiscalYear.passed_month_count_by(Date.parse("2000/01/01"))).to be 0
+        end
+      end
+
+      context "2000年10月のとき" do
+        it "9を返す" do
+          expect(FiscalYear.passed_month_count_by(Date.parse("2000/10/01"))).to be 9
+        end
+      end
+
+      context "2000年12月のとき" do
+        it "11を返す" do
+          expect(FiscalYear.passed_month_count_by(Date.parse("2000/12/01"))).to be 11
+        end
+      end
+    end
+
+    context "年度開始が12月の場合" do
+      include_context "fiscal_year_start_dec"
+
+      context "2000年12月のとき" do
+        it "0を返す" do
+          expect(FiscalYear.passed_month_count_by(Date.parse("2000/12/01"))).to be 0
+        end
+      end
+
+      context "2001年1月のとき" do
+        it "1を返す" do
+          expect(FiscalYear.passed_month_count_by(Date.parse("2001/01/01"))).to be 1
+        end
+      end
+
+      context "2001年10月のとき" do
+        it "10を返す" do
+          expect(FiscalYear.passed_month_count_by(Date.parse("2001/10/01"))).to be 10
+        end
+      end
+    end
+  end
+
+  describe "#passed_month_count_by_month" do
+    context "年度開始が4月の場合" do
+      include_context "fiscal_year_start_apr"
+
+      context "4月のとき" do
+        it "0を返す" do
+          expect(FiscalYear.passed_month_count_by_month(4)).to be 0
+        end
+      end
+
+      context "10月のとき" do
+        it "6を返す" do
+          expect(FiscalYear.passed_month_count_by_month(10)).to be 6
+        end
+      end
+
+      context "1月のとき" do
+        it "9を返す" do
+          expect(FiscalYear.passed_month_count_by_month(1)).to be 9
+        end
+      end
+    end
+
+    context "年度開始が1月の場合" do
+      include_context "fiscal_year_start_jan"
+
+      context "1月のとき" do
+        it "0を返す" do
+          expect(FiscalYear.passed_month_count_by_month(1)).to be 0
+        end
+      end
+
+      context "10月のとき" do
+        it "9を返す" do
+          expect(FiscalYear.passed_month_count_by_month(10)).to be 9
+        end
+      end
+
+      context "12月のとき" do
+        it "11を返す" do
+          expect(FiscalYear.passed_month_count_by_month(12)).to be 11
+        end
+      end
+    end
+
+    context "年度開始が12月の場合" do
+      include_context "fiscal_year_start_dec"
+
+      context "12月のとき" do
+        it "0を返す" do
+          expect(FiscalYear.passed_month_count_by_month(12)).to be 0
+        end
+      end
+
+      context "1月のとき" do
+        it "1を返す" do
+          expect(FiscalYear.passed_month_count_by_month(1)).to be 1
+        end
+      end
+
+      context "10月のとき" do
+        it "10を返す" do
+          expect(FiscalYear.passed_month_count_by_month(10)).to be 10
+        end
+      end
+    end
+  end
 end

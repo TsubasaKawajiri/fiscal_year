@@ -110,5 +110,22 @@ module FiscalYear
 
       FiscalYear::Half.first_range_by(normalized_year).first..FiscalYear::Half.second_range_by(normalized_year).last
     end
+
+    # start by 0.
+    # 
+    # @see passed_month_count_by_month
+    # @param date [Date] the date
+    # @return [Integer] the passed month count from the beginning of the fiscal year.
+    def passed_month_count_by(date)
+      passed_month_count_by_month(date.month)
+    end
+
+    # start by 0.
+    #
+    # @param month [Integer] the month
+    # @return [Integer] the passed month count from the beginning of the fiscal year.
+    def passed_month_count_by_month(month)
+      months.find_index(month) || raise(StandardError)
+    end
   end
 end
