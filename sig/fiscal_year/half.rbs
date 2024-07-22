@@ -4,6 +4,7 @@ module FiscalYear
     def self.second: () -> Array[Integer] | -> Array[untyped]
     def self.first?: (Integer) -> bool
     def self.second?: (Integer) -> bool
+    def self.months: (Integer) -> Array[Integer]
     def self.first_range_by: (Integer) -> Range[Date]
     def self.second_range_by: (Integer) -> Range[Date]
     def self.range_by: (Date) -> Range[Date]

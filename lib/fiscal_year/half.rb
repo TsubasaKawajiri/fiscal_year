@@ -31,6 +31,12 @@ module FiscalYear
         !first?(month)
       end
 
+      # @param month [Integer] the month
+      # @return [Array<Integer>] the half months by the month.
+      def months(month)
+        first?(month) ? first : second
+      end
+
       # @param year [Integer] the calendar year
       # @return [Range<Date>] the range of the first half of the fiscal year.
       def first_range_by(year)

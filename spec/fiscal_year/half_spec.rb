@@ -116,6 +116,56 @@ RSpec.describe FiscalYear::Half do
     end
   end
 
+  describe "#months" do
+    it "配列を返す" do
+      expect(FiscalYear::Half.months(1).class).to be Array
+    end
+
+    it "6ヶ月存在している" do
+      expect(FiscalYear::Half.months(1).count).to be 6
+    end
+
+    context "年度開始が4月の場合" do
+      include_context "fiscal_year_start_apr"
+
+      it "4月が属する半期の月は4, 5, 6, 8, 9月であり、順番が保証されている" do
+        expect(FiscalYear::Half.months(4)).to eq [4, 5, 6, 7, 8, 9]
+      end
+
+      it "9月が属する半期の月は4, 5, 6, 8, 9月であり、順番が保証されている" do
+        expect(FiscalYear::Half.months(9)).to eq [4, 5, 6, 7, 8, 9]
+      end
+
+      it "10月が属する半期の月は10, 11, 12, 1, 2, 3月であり、順番が保証されている" do
+        expect(FiscalYear::Half.months(10)).to eq [10, 11, 12, 1, 2, 3]
+      end
+
+      it "3月が属する半期の月は10, 11, 12, 1, 2, 3月であり、順番が保証されている" do
+        expect(FiscalYear::Half.months(3)).to eq [10, 11, 12, 1, 2, 3]
+      end
+    end
+
+    context "年度開始が1月の場合" do
+      include_context "fiscal_year_start_jan"
+
+      it "1月が属する半期の月は1, 2, 3, 4, 5, 6月であり、順番が保証されている" do
+        expect(FiscalYear::Half.months(1)).to eq [1, 2, 3, 4, 5, 6]
+      end
+
+      it "6月が属する半期の月は1, 2, 3, 4, 5, 6月であり、順番が保証されている" do
+        expect(FiscalYear::Half.months(6)).to eq [1, 2, 3, 4, 5, 6]
+      end
+
+      it "7月が属する半期の月は7, 8, 9, 10, 11, 12月であり、順番が保証されている" do
+        expect(FiscalYear::Half.months(7)).to eq [7, 8, 9, 10, 11, 12]
+      end
+
+      it "12月が属する半期の月は7, 8, 9, 10, 11, 12月であり、順番が保証されている" do
+        expect(FiscalYear::Half.months(12)).to eq [7, 8, 9, 10, 11, 12]
+      end
+    end
+  end
+
   describe "#first_range_by" do
     it "Rangeを返す" do
       expect(FiscalYear::Half.first_range_by(2000).class).to be Range
