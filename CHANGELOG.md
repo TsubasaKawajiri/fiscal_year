@@ -1,3 +1,13 @@
+## [1.0.0] - 2024-07-24
+celebrate 1.0.0 release!! 🎉
+No Breaking Changes, Some futures.
+
+- add `passed_month_count_by` and `passed_month_count_by_month` to each FiscalYear, Half, Quarter.
+- fix wrong example comment on `FiscalYear::YearToDate.quarter_range_by`.
+- robust `Config.start_month`. you can no longer pass invalid month. now only pass number 1-12, or short symbol like `:jan`, `:dec`.
+
+Thank you for gave me courage to release, ruby-jp!
+
 ## [0.7.0] - 2024-07-11
 - add YARD comment.
 - fix `FiscalYear::YearToDate.quarter_range_by` logic.
