@@ -25,7 +25,7 @@ module FiscalYear
       @start_month = 4
     end
 
-    def set_start_month(month)
+    def start_month=(month)
       valid_start_month?(month)
 
       @start_month = fetch_start_month(month)

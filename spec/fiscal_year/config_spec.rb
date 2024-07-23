@@ -9,12 +9,12 @@ RSpec.describe FiscalYear::Config do
     end
   end
 
-  describe "#set_start_month" do
+  describe "#start_month=" do
     context "引数が整数の場合" do
       it "start_monthに数値で設定される" do
         config = FiscalYear::Config.new
 
-        config.set_start_month(1)
+        config.start_month = 1
 
         expect(config.start_month).to eq(1)
       end
@@ -24,7 +24,7 @@ RSpec.describe FiscalYear::Config do
       it "start_monthに数値で設定される" do
         config = FiscalYear::Config.new
 
-        config.set_start_month(:jan)
+        config.start_month = :jan
 
         expect(config.start_month).to eq(1)
       end
@@ -34,7 +34,7 @@ RSpec.describe FiscalYear::Config do
       it "InvalidStartMonthErrorが発生する" do
         config = FiscalYear::Config.new
 
-        expect { config.set_start_month(13) }.to raise_error(FiscalYear::InvalidStartMonthError)
+        expect { config.start_month = 13 }.to raise_error(FiscalYear::InvalidStartMonthError)
       end
     end
   end

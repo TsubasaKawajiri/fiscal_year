@@ -22,7 +22,7 @@ module FiscalYear
     # @yieldparam config [FiscalYear::Config]
     # @example
     #  FiscalYear.configure do |config|
-    #    config.set_start_month 6
+    #    config.set_start_month = 6
     #  end
     def configure
       yield(@config) if block_given?
