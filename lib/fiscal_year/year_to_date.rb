@@ -75,7 +75,7 @@ module FiscalYear
       #  => Thu, 01 Jul 2021..Tue, 31 Aug 2021
       #
       #  FiscalYear::YearToDate.quarter_range_by(Date.parse("2021-01-01"))
-      #  =>  Wed, 01 Jan 2020..Sun, 31 Jan 2021
+      #  =>  Fri, 01 Jan 2021..Sun, 31 Jan 2021
       def quarter_range_by(date)
         year = date.year
         month = date.month
