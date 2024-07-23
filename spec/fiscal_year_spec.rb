@@ -16,9 +16,17 @@ RSpec.describe FiscalYear do
       expect(FiscalYear.config.start_month).not_to be nil
     end
 
-    it "値が変更できる" do
+    it "数値で値が変更できる" do
       FiscalYear.configure do |config|
         config.start_month = 6
+      end
+
+      expect(FiscalYear.config.start_month).to eq 6
+    end
+
+    it "シンボルで値が変更できる" do
+      FiscalYear.configure do |config|
+        config.start_month = :jun
       end
 
       expect(FiscalYear.config.start_month).to eq 6

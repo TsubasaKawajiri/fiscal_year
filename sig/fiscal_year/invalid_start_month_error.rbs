@@ -1,0 +1,5 @@
+module FiscalYear
+  class InvalidStartMonthError < StandardError
+    def message: -> String
+  end
+end

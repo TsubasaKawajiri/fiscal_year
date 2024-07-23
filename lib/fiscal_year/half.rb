@@ -5,18 +5,12 @@ module FiscalYear
     class << self
       # @return [Array<Integer>] the first half of the fiscal year.
       def first
-        first = FiscalYear.halfs.first
-        return first if first.is_a? Array
-
-        []
+        FiscalYear.halfs.first || raise(StandardError)
       end
 
       # @return [Array<Integer>] the second half of the fiscal year.
       def second
-        second = FiscalYear.halfs.second
-        return second if second.is_a? Array
-
-        []
+        FiscalYear.halfs.second || raise(StandardError)
       end
 
       # @param month [Integer] the month
@@ -43,8 +37,7 @@ module FiscalYear
         # care Date#parse 2 digit year auto complete.
         # 99 + 1 = 100, but expect 2000 this context.
         year = 1999 if year == 99
-        end_month = first.last
-        raise StandardError if end_month.nil?
+        end_month = first.last || raise(StandardError)
 
         end_year = FiscalYear.increase_year_by_month(year, end_month)
 
@@ -57,9 +50,8 @@ module FiscalYear
         # care Date#parse 2 digit year auto complete.
         # 99 + 1 = 100, but expect 2000 this context.
         year = 1999 if year == 99
-        first_month = second.first
-        end_month = second.last
-        raise StandardError if first_month.nil? || end_month.nil?
+        first_month = second.first || raise(StandardError)
+        end_month = second.last || raise(StandardError)
 
         start_year = FiscalYear.increase_year_by_month(year, first_month)
         end_year = FiscalYear.increase_year_by_month(year, end_month)

@@ -47,10 +47,7 @@ module FiscalYear
       # @param month [Integer] the month
       # @return [Array<Integer>] the quarter months by the month.
       def months(month)
-        months = FiscalYear.quarters.find { |a| a.include?(month) }
-        raise ::StandardError if months.nil?
-
-        months
+        FiscalYear.quarters.find { |a| a.include?(month) } || raise(StandardError)
       end
 
       # @param date [Date] the date

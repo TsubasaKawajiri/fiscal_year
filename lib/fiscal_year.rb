@@ -53,10 +53,7 @@ module FiscalYear
 
       rindex = months.rindex(1).to_i
 
-      m = months.slice(rindex, months.length)
-      raise StandardError if m.nil?
-
-      m
+      months.slice(rindex, months.length) || raise(StandardError)
     end
 
     # @return [Array(Array<Integer>, Array<Integer>)] the first half and the second half of the fiscal year.
