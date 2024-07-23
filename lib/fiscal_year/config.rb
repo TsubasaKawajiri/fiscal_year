@@ -29,8 +29,6 @@ module FiscalYear
       valid_start_month?(month)
 
       @start_month = fetch_start_month(month)
-
-      true
     end
 
     private
