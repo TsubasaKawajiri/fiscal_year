@@ -1,6 +1,10 @@
 module FiscalYear
   class Config
     attr_reader start_month: Integer
+    VALID_START_MONTHS: Hash[Symbol, Integer]
     def initialize: -> Integer
+    def set_start_month: (Integer|Symbol) -> bool
+    def valid_start_month?: (Integer|Symbol) -> bool
+    def fetch_start_month: (Integer|Symbol) -> Integer
   end
 end
