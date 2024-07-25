@@ -24,7 +24,7 @@ bundle install
 
 ## Usage
 
-```
+```ruby
 require 'fiscal_year'
 
 FiscalYear.quarters
