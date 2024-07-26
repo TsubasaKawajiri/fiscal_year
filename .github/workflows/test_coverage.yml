@@ -1,7 +1,9 @@
-name: Test
+name: TestCoverage
 
 on:
-  pull_request:
+  push:
+    branches:
+      - master
 
 permissions:
   contents: read
@@ -14,8 +16,6 @@ jobs:
       matrix:
         ruby:
           - '3.3.4'
-          - '3.2.4'
-          - '3.1.5'
 
     steps:
     - uses: actions/checkout@v4
@@ -24,3 +24,8 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
+    - uses: paambaati/codeclimate-action@v8.0.0
+      env:
+        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+      with:
+        coverageCommand: bundle exec rspec
