@@ -1,3 +1,6 @@
+## [1.1.0] - 2025-01-10
+- support ruby 3.4.
+
 ## [1.0.0] - 2024-07-24
 celebrate 1.0.0 release!! 🎉
 No Breaking Changes, Some futures.
