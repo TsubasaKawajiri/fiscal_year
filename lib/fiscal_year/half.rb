@@ -118,8 +118,10 @@ module FiscalYear
       # @param end_month [Integer]
       # @return [Range<Date>] built range between start and end month
       def build_range(start_year, start_month, end_year, end_month)
-        Date.new(start_year, start_month, 1)..
-          Date.new(end_year, end_month, 1).end_of_month
+        start_date = Date.new(start_year, start_month, 1)
+        end_date = Date.new(end_year, end_month, 1).end_of_month
+
+        start_date..end_date
       end
     end
   end
