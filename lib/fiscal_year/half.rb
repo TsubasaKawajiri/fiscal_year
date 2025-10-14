@@ -3,6 +3,9 @@
 module FiscalYear
   class Half
     class << self
+      NORMALIZED_TWO_DIGIT_YEAR = 1999
+      private_constant :NORMALIZED_TWO_DIGIT_YEAR
+
       # @return [Array<Integer>] the first half of the fiscal year.
       def first
         FiscalYear.halfs.first || raise(StandardError)
@@ -34,29 +37,15 @@ module FiscalYear
       # @param year [Integer] the calendar year
       # @return [Range<Date>] the range of the first half of the fiscal year.
       def first_range_by(year)
-        # care Date#parse 2 digit year auto complete.
-        # 99 + 1 = 100, but expect 2000 this context.
-        year = 1999 if year == 99
-        end_month = first.last || raise(StandardError)
-
-        end_year = FiscalYear.increase_year_by_month(year, end_month)
-
-        Date.parse("#{year}/#{first.first}/01")..Date.parse("#{end_year}/#{end_month}/01").end_of_month
+        year = normalize_year(year)
+        range_for(first, year)
       end
 
       # @param year [Integer] the calendar year
       # @return [Range<Date>] the range of the second half of the fiscal year.
       def second_range_by(year)
-        # care Date#parse 2 digit year auto complete.
-        # 99 + 1 = 100, but expect 2000 this context.
-        year = 1999 if year == 99
-        first_month = second.first || raise(StandardError)
-        end_month = second.last || raise(StandardError)
-
-        start_year = FiscalYear.increase_year_by_month(year, first_month)
-        end_year = FiscalYear.increase_year_by_month(year, end_month)
-
-        Date.parse("#{start_year}/#{first_month}/01")..Date.parse("#{end_year}/#{end_month}/01").end_of_month
+        year = normalize_year(year)
+        range_for(second, year, offset_start_year: true)
       end
 
       # @param date [Date] the date
@@ -92,6 +81,45 @@ module FiscalYear
       # @return [Integer] the passed month count from the beginning of the half.
       def passed_month_count_by_month(month)
         months(month).find_index(month) || raise(StandardError)
+      end
+
+      private
+
+      # @param year [Integer]
+      # @return [Integer] normalized year value for Date.parse
+      def normalize_year(year)
+        # care Date#parse 2 digit year auto complete.
+        # 99 + 1 = 100, but expect 2000 this context.
+        year == 99 ? NORMALIZED_TWO_DIGIT_YEAR : year
+      end
+
+      # @param half [Array<Integer>]
+      # @return [Array<Integer>] tuple of first and last month
+      def boundary_months(half)
+        [half.first || raise(StandardError), half.last || raise(StandardError)]
+      end
+
+      # @param half [Array<Integer>]
+      # @param year [Integer]
+      # @param offset_start_year [Boolean]
+      # @return [Range<Date>]
+      def range_for(half, year, offset_start_year: false)
+        start_month, end_month = boundary_months(half)
+
+        start_year = offset_start_year ? FiscalYear.increase_year_by_month(year, start_month) : year
+        end_year = FiscalYear.increase_year_by_month(year, end_month)
+
+        build_range(start_year, start_month, end_year, end_month)
+      end
+
+      # @param start_year [Integer]
+      # @param start_month [Integer]
+      # @param end_year [Integer]
+      # @param end_month [Integer]
+      # @return [Range<Date>] built range between start and end month
+      def build_range(start_year, start_month, end_year, end_month)
+        Date.new(start_year, start_month, 1)..
+          Date.new(end_year, end_month, 1).end_of_month
       end
     end
   end
